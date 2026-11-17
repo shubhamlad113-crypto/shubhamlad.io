@@ -1275,6 +1275,14 @@ function initScrollSpyAndNav() {
         if (menuIcon) menuIcon.className = 'fa-solid fa-bars';
       });
     });
+
+    // Close mobile menu when resizing back to desktop
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 960) {
+        navMenu.classList.remove('open');
+        if (menuIcon) menuIcon.className = 'fa-solid fa-bars';
+      }
+    });
   }
 
   // Scroll spy

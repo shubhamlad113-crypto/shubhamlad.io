@@ -402,6 +402,8 @@ img, svg {
   align-items: center;
   justify-content: space-between;
   height: 72px;
+  gap: 1rem;
+  overflow: visible;
 }
 
 .brand-logo {
@@ -466,23 +468,24 @@ img, svg {
   display: flex;
   align-items: center;
   list-style: none;
-  gap: 1.5rem;
+  gap: 0.25rem;
 }
 
 .nav-link {
-  font-size: 0.9rem;
+  font-size: 0.875rem;
   font-weight: 500;
   color: var(--text-secondary);
   display: flex;
   align-items: center;
   gap: 0.4rem;
-  padding: 0.4rem 0.6rem;
+  padding: 0.4rem 0.55rem;
   border-radius: var(--radius-sm);
   transition: all var(--trans-fast);
+  white-space: nowrap;
 }
 
 .nav-link i {
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   opacity: 0.7;
 }
 
@@ -500,7 +503,8 @@ img, svg {
 .nav-actions {
   display: flex;
   align-items: center;
-  gap: 0.85rem;
+  gap: 0.6rem;
+  flex-shrink: 0;
 }
 
 .theme-switch-wrapper {
@@ -2586,6 +2590,19 @@ img, svg {
 /* ==========================================================================
    RESPONSIVE DESIGN (MEDIA QUERIES)
    ========================================================================== */
+
+/* --- Large Desktop: tighten nav slightly --- */
+@media (max-width: 1240px) {
+  .nav-list {
+    gap: 0.15rem;
+  }
+  .nav-link {
+    font-size: 0.82rem;
+    padding: 0.4rem 0.45rem;
+  }
+}
+
+/* --- Medium breakpoint: hide tagline & nav icons to save room --- */
 @media (max-width: 1024px) {
   .hero-grid {
     grid-template-columns: 1fr;
@@ -2610,6 +2627,80 @@ img, svg {
   }
   .footer-right {
     align-items: center;
+  }
+
+  /* Slim the nav */
+  .brand-tagline {
+    display: none;
+  }
+  .nav-link i {
+    display: none;
+  }
+  .nav-link {
+    gap: 0;
+    padding: 0.4rem 0.4rem;
+  }
+  .nav-actions {
+    gap: 0.45rem;
+  }
+  /* Hide "Let's Talk" CTA button – too wide at this breakpoint */
+  .nav-cta-btn {
+    display: none;
+  }
+}
+
+/* --- Collapse nav into hamburger below 960px --- */
+@media (max-width: 960px) {
+  /* Show hamburger */
+  .mobile-toggle-btn {
+    display: inline-flex;
+  }
+
+  /* Slide-in mobile drawer */
+  .nav-menu {
+    position: fixed;
+    top: 72px;
+    left: 0;
+    width: 100vw;
+    height: calc(100vh - 72px);
+    background: var(--bg-primary);
+    border-bottom: 1px solid var(--border-color);
+    padding: 2rem 1.5rem;
+    transform: translateX(-100%);
+    transition: transform var(--trans-base);
+    overflow-y: auto;
+    z-index: 999;
+  }
+  .nav-menu.open {
+    transform: translateX(0);
+  }
+  .nav-list {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+  }
+  .nav-link {
+    font-size: 1.1rem;
+    width: 100%;
+    padding: 0.65rem 1rem;
+  }
+  /* Show icons again inside the open mobile drawer */
+  .nav-link i {
+    display: inline-block;
+    font-size: 0.9rem;
+  }
+
+  /* Show "Let's Talk" in the drawer */
+  .nav-cta-btn {
+    display: none;
+  }
+
+  /* Keep actions compact */
+  .brand-tagline {
+    display: none;
+  }
+  .nav-actions {
+    gap: 0.5rem;
   }
 }
 
@@ -2638,40 +2729,6 @@ img, svg {
     padding-bottom: 0.75rem;
   }
 
-  /* Mobile Nav Drawer */
-  .mobile-toggle-btn {
-    display: inline-flex;
-  }
-  .nav-menu {
-    position: fixed;
-    top: 72px;
-    left: 0;
-    width: 100vw;
-    height: calc(100vh - 72px);
-    background: var(--bg-primary);
-    border-bottom: 1px solid var(--border-color);
-    padding: 2rem 1.5rem;
-    transform: translateX(-100%);
-    transition: transform var(--trans-base);
-    overflow-y: auto;
-  }
-  .nav-menu.open {
-    transform: translateX(0);
-  }
-  .nav-list {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1.25rem;
-  }
-  .nav-link {
-    font-size: 1.15rem;
-    width: 100%;
-    padding: 0.65rem 1rem;
-  }
-  .nav-cta-btn {
-    display: none;
-  }
-
   /* Form row on mobile */
   .form-row {
     grid-template-columns: 1fr;
@@ -2696,6 +2753,41 @@ img, svg {
   }
   .role-period-badge {
     align-items: flex-start;
+  }
+
+  /* Collapse Resume button to icon-only on mobile */
+  #viewResumeBtn .btn-label {
+    display: none;
+  }
+}
+
+/* --- Extra small screens (≤480px) --- */
+@media (max-width: 480px) {
+  .brand-name {
+    font-size: 0.95rem;
+  }
+  .container {
+    padding: 0 1rem;
+  }
+  .hero-title {
+    font-size: 1.9rem;
+  }
+  .dynamic-typing-wrapper {
+    font-size: 1.25rem;
+  }
+  .hero-cta-group {
+    flex-direction: column;
+  }
+  .hero-cta-group .btn {
+    width: 100%;
+    justify-content: center;
+  }
+  .hero-metrics {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  /* Keep only icon+short label for Resume btn */
+  #viewResumeBtn {
+    padding: 0.45rem 0.6rem;
   }
 }
 
